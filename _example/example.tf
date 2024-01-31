@@ -1,40 +1,30 @@
 provider "google" {
-  project = var.gcp_project_id
-  region  = var.gcp_region
-  zone    = var.gcp_zone
+  project = "local-concord-408802"
+  region  = "asia-northeast1"
+  zone    = "asia-northeast1-a"
 }
 
+#####==============================================================================
+##### module-vpc
+#####==============================================================================
 module "vpc" {
-  source      = "git::git@github.com:slovink/gcp-terraform-gcp-vpc.git"
-
-  name                           = "vpc"
-  environment                    = "test"
-  label_order                    = ["environment", "name"]
-  google_compute_network_enabled = true
+  source                                    = "slovink/vpc/google"
+  version                                   = "1.0.1"
+  name                                      = "app"
+  environment                               = "test"
+  routing_mode                              = "REGIONAL"
+  network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
 }
 
+#####==============================================================================
+##### module-subnetwork
+#####==============================================================================
 module "subnet" {
-  source = "../"
-
-  name        = "dev"
-  environment = var.environment
-  label_order = var.label_order
-
-  google_compute_subnetwork_enabled  = true
-  google_compute_firewall_enabled    = true
-  google_compute_router_nat_enabled  = true
-  module_enabled                     = true
-  network                            = module.vpc.vpc_id
-  project_id                         = ""
-  private_ip_google_access           = true
-  allow                              = [{ "protocol" : "tcp", "ports" : ["1-65535"] }]
-  source_ranges                      = ["10.10.0.0/16"]
-  asn                                = 64514
-  nat_ip_allocate_option             = "MANUAL_ONLY"
-  source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
-  filter                             = "ERRORS_ONLY"
-  dest_range                         = "0.0.0.0/0"
-  next_hop_gateway                   = "default-internet-gateway"
-  priority                           = 1000
-  secondary_ip_ranges                = [{ "range_name" : "services", "ip_cidr_range" : "10.1.0.0/16" }, { "range_name" : "pods", "ip_cidr_range" : "10.3.0.0/16" }]
+  source        = "../"
+  name          = "app"
+  environment   = "test"
+  subnet_names  = ["subnet-a", "subnet-b"]
+  gcp_region    = "asia-northeast1"
+  network       = module.vpc.vpc_id
+  ip_cidr_range = ["10.10.1.0/24", "10.10.5.0/24"]
 }
