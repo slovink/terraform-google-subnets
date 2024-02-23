@@ -8,8 +8,7 @@ provider "google" {
 ##### module-vpc
 #####==============================================================================
 module "vpc" {
-  source                                    = "slovink/vpc/google"
-  version                                   = "1.0.1"
+  source                                    = "git::https://github.com/slovink/terraform-google-network.git?ref=v1.0.0"
   name                                      = "app"
   environment                               = "test"
   routing_mode                              = "REGIONAL"

@@ -1,5 +1,5 @@
 # Terraform-google-subnet
-# Terraform Google Cloud subnet Module
+# Terraform Google Cloud Subnet Module
 
 ## Table of Contents
 
@@ -24,7 +24,6 @@ To get started, make sure you have configured your GCP provider. You can use the
 ```hcl
 module "subnet" {
   source        = "git::https://github.com/slovink/terraform-google-subnets.git?ref=v1.0.0"
-  version       = "1.0.1"
   name          = "app"
   environment   = "test"
   subnet_names  = ["subnet-a", "subnet-b"]
@@ -37,7 +36,7 @@ Make sure to configure the variables according to your requirements.
 
 
 ## Examples
-For detailed examples on how to use this module, please refer to the [Examples](https://github.com/slovink/terraform-google-subnets/tree/master/_example) directory within this repository.
+For detailed examples on how to use this module, please refer to the [Examples](https://github.com/slovink/terraform-google-subnets/tree/master/example) directory within this repository.
 
 ## Author
 Your Name Replace **MIT** and **slovink** with the appropriate license and your information. Feel free to expand this README with additional details or usage instructions as needed for your specific use case.
@@ -63,7 +62,7 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_labels"></a> [labels](#module\_labels) | git::https://github.com/slovink/terraform-google-labels.git?ref=master | 1.0.1 |
+| <a name="module_labels"></a> [labels](#module\_labels) | git::https://github.com/slovink/terraform-google-labels.git | v1.0.2 |
 
 ## Resources
 
