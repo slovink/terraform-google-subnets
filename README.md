@@ -24,9 +24,9 @@ To get started, make sure you have configured your GCP provider. You can use the
 ```hcl
 module "subnet" {
   source        = "git::https://github.com/slovink/terraform-google-subnets.git?ref=v1.0.0"
-  name          = "app"
+  name          = "ops"
   environment   = "test"
-  subnet_names  = ["subnet-a", "subnet-b"]
+  subnet_names  = ["subnet-1", "subnet-2"]
   gcp_region    = "asia-northeast1"
   network       = module.vpc.vpc_id
   ip_cidr_range = ["10.10.1.0/24", "10.10.5.0/24"]
