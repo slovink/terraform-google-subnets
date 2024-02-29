@@ -1,3 +1,33 @@
+<p align="center"> <img src="https://user-images.githubusercontent.com/50652676/62349836-882fef80-b51e-11e9-99e3-7b974309c7e3.png" width="100" height="100"></p>
+
+
+<h1 align="center">
+    Terraform google subnets
+</h1>
+
+<p align="center" style="font-size: 1.2rem;">
+    Terraform module to create subnets resource on google.
+     </p>
+
+<p align="center">
+
+<a href="https://www.terraform.io">
+  <img src="https://img.shields.io/badge/Terraform-v1.7.4-green" alt="Terraform">
+</a>
+<a href="https://github.com/slovink/terraform-google-subnets/blob/main/LICENSE">
+  <img src="https://img.shields.io/badge/License-APACHE-blue.svg" alt="Licence">
+</a>
+
+</p>
+<p align="center">
+
+<a href='https://www.facebook.com/Slovink.in=https://github.com/slovink/terraform-lables'>
+  <img title="Share on Facebook" src="https://user-images.githubusercontent.com/50652676/62817743-4f64cb80-bb59-11e9-90c7-b057252ded50.png" />
+</a>
+<a href='https://www.linkedin.com/company/101534993/admin/feed/posts/=https://github.com/slovink/terraform-lables'>
+  <img title="Share on LinkedIn" src="https://user-images.githubusercontent.com/50652676/62817742-4e339e80-bb59-11e9-87b9-a1f68cae1049.png" />
+</a>
+
 # Terraform-google-subnet
 # Terraform Google Cloud Subnet Module
 
@@ -20,7 +50,7 @@ This project deploys a Google Cloud infrastructure using Terraform to create Sub
 ## Usage
 
 To get started, make sure you have configured your GCP provider. You can use the following code as a starting point:
-## Example: subnet
+## Example: subnets
 ```hcl
 module "subnet" {
   source        = "git::https://github.com/slovink/terraform-google-subnets.git?ref=v1.0.0"
@@ -49,20 +79,20 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6.6 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >= 3.50, < 5.11.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.7.4 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | >= 3.50, < 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | >= 3.50, < 5.11.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | >= 3.50, < 5.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_labels"></a> [labels](#module\_labels) | git::https://github.com/slovink/terraform-google-labels.git | v1.0.2 |
+| <a name="module_labels"></a> [labels](#module\_labels) | git::https://github.com/slovink/terraform-google-labels.git | v1.0.0 |
 
 ## Resources
 
@@ -102,7 +132,7 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 | <a name="input_priority"></a> [priority](#input\_priority) | The priority of this route. | `number` | `1000` | no |
 | <a name="input_private_ip_google_access"></a> [private\_ip\_google\_access](#input\_private\_ip\_google\_access) | (Optional) When enabled, VMs in this subnetwork without external IP addresses can access Google APIs and services by using Private Google Access. | `bool` | `true` | no |
 | <a name="input_purpose"></a> [purpose](#input\_purpose) | - (Optional) The purpose of the resource. This field can be either PRIVATE\_RFC\_1918, REGIONAL\_MANAGED\_PROXY, GLOBAL\_MANAGED\_PROXY, or PRIVATE\_SERVICE\_CONNECT | `string` | `""` | no |
-| <a name="input_repository"></a> [repository](#input\_repository) | Terraform current module repo | `string` | `"https://github.com/slovink/terraform-google-subnet"` | no |
+| <a name="input_repository"></a> [repository](#input\_repository) | Terraform current module repo | `string` | `"https://github.com/slovink/terraform-google-subnets"` | no |
 | <a name="input_route_enabled"></a> [route\_enabled](#input\_route\_enabled) | Toggle to enable or disable routing functionality. | `bool` | `true` | no |
 | <a name="input_router_enabled"></a> [router\_enabled](#input\_router\_enabled) | Toggle to enable or disable the router. | `bool` | `true` | no |
 | <a name="input_router_nat_enabled"></a> [router\_nat\_enabled](#input\_router\_nat\_enabled) | Toggle to enable or disable NAT functionality for the router. | `bool` | `true` | no |
