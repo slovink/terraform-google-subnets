@@ -1,5 +1,5 @@
 provider "google" {
-  project = "local-concord-408802"
+  project = "testing-gcp-ops"
   region  = "asia-northeast1"
   zone    = "asia-northeast1-a"
 }
@@ -9,7 +9,7 @@ provider "google" {
 #####==============================================================================
 module "vpc" {
   source                                    = "git::https://github.com/slovink/terraform-google-network.git?ref=v1.0.0"
-  name                                      = "app"
+  name                                      = "ops"
   environment                               = "test"
   routing_mode                              = "REGIONAL"
   network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
@@ -20,9 +20,9 @@ module "vpc" {
 #####==============================================================================
 module "subnet" {
   source        = "../"
-  name          = "app"
+  name          = "ops"
   environment   = "test"
-  subnet_names  = ["subnet-a", "subnet-b"]
+  subnet_names  = ["subnet-1", "subnet-2"]
   gcp_region    = "asia-northeast1"
   network       = module.vpc.vpc_id
   ip_cidr_range = ["10.10.1.0/24", "10.10.5.0/24"]

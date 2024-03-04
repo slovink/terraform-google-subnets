@@ -18,7 +18,7 @@ variable "label_order" {
 
 variable "repository" {
   type        = string
-  default     = "https://github.com/slovink/terraform-google-subnet"
+  default     = "https://github.com/slovink/terraform-google-subnets"
   description = "Terraform current module repo"
 }
 
