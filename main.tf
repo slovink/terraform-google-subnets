@@ -23,8 +23,8 @@ resource "google_compute_subnetwork" "subnetwork" {
   network                  = var.network
   region                   = var.gcp_region
   description              = var.description
-  purpose                  = var.purpose
-  ipv6_access_type         = var.ipv6_access_type
+  stack_type               = "IPV4_IPV6"
+  ipv6_access_type         = "INTERNAL"
   private_ip_google_access = var.private_ip_google_access
   ip_cidr_range            = var.ip_cidr_range[count.index]
   dynamic "secondary_ip_range" {
