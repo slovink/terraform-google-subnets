@@ -155,17 +155,17 @@ variable "description" {
   description = "(Optional) An optional description of the VPC. The resource must be recreated to modify this field.Default is ''."
 }
 
-variable "purpose" {
-  type        = string
-  default     = ""
-  description = "- (Optional) The purpose of the resource. This field can be either PRIVATE_RFC_1918, REGIONAL_MANAGED_PROXY, GLOBAL_MANAGED_PROXY, or PRIVATE_SERVICE_CONNECT"
-}
+#variable "purpose" {
+#  type        = string
+#  default     = ""
+#  description = "- (Optional) The purpose of the resource. This field can be either PRIVATE_RFC_1918, REGIONAL_MANAGED_PROXY, GLOBAL_MANAGED_PROXY, or PRIVATE_SERVICE_CONNECT"
+#}
 
-variable "ipv6_access_type" {
-  type        = string
-  default     = "EXTERNAL"
-  description = "The access type of IPv6 address this subnet holds."
-}
+#variable "ipv6_access_type" {
+#  type        = string
+#  default     = "EXTERNAL"
+#  description = "The access type of IPv6 address this subnet holds."
+#}
 
 variable "ip_version" {
   type        = string
