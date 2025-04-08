@@ -57,7 +57,7 @@ stages:
     dependsOn: Prepare
     displayName: Subnet
     jobs:
-      - job: Network
+      - job: Subnet
         steps:
           - task: TerraformCLI@0
             displayName: Terraform Initialize
