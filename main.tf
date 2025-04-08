@@ -16,6 +16,9 @@ data "google_client_config" "current" {
 ##### a given VPC network.
 #####==============================================================================
 #tfsec:ignore:google-compute-enable-vpc-flow-logs
+#####==============================================================================
+##### Represents a Route resource.
+#####==============================================================================
 resource "google_compute_subnetwork" "subnetwork" {
   count         = length(var.subnet_names) > 0 && length(var.ip_cidr_range) > 0 ? min(length(var.subnet_names), length(var.ip_cidr_range)) : 0
   name          = "${var.subnet_names[count.index]}-${module.labels.id}"
@@ -131,7 +134,6 @@ resource "google_compute_address" "default" {
   region       = var.region
   address      = length(var.address) > 0 ? element(var.address, count.index) : null
   address_type = var.address_type
-  labels       = var.labels
   description  = try(element(var.description, count.index), null)
 
   // Remove the network and subnetwork fields for external IPs

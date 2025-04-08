@@ -297,11 +297,11 @@ variable "ipv6_endpoint_type" {
   description = "Endpoint type of the address (VM or NETLB)."
 }
 
-variable "labels" {
-  type        = map(string)
-  default     = {} # Example key-value pair
-  description = "Labels to apply to the address."
-}
+#variable "labels" {
+#  type        = map(string)
+#  default     = {} # Example key-value pair
+#  description = "Labels to apply to the address."
+#}
 
 # 9. NAT Configuration
 variable "drain_nat_ips" {

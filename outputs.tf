@@ -1,3 +1,4 @@
+
 # Outputs for google_compute_subnetwork
 output "subnet_id" {
   description = "The ID of the GCP subnetwork."
@@ -104,12 +105,12 @@ output "address_label_fingerprint" {
 
 output "address_terraform_labels" {
   description = "Labels that are directly configured on the resource, including default labels."
-  value       = join(", ", [for k, v in google_compute_address.default[0].terraform_labels : "${k}=${v}"])
+  value       = join(", ", [for k, v in google_compute_address.default[*].terraform_labels : "${k}=${v}"])
 }
 
 output "address_effective_labels" {
   description = "All labels (key/value pairs) currently applied to the resource."
-  value       = join(", ", [for k, v in google_compute_address.default[0].effective_labels : "${k}=${v}"])
+  value       = join(", ", [for k, v in google_compute_address.default[*].effective_labels : "${k}=${v}"])
 }
 
 output "address_creation_timestamp" {

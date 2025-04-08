@@ -133,3 +133,4 @@ output "router_nat_region" {
   description = "The region of the GCP router NAT configuration."
   value       = module.subnet.router_nat_region
 }
+

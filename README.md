@@ -80,13 +80,13 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.9.5 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >=6.1.0 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | >= 3.50.0, < 5.11.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | >=6.1.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | >= 3.50.0, < 5.11.0 |
 
 ## Modules
 
@@ -128,7 +128,6 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 | <a name="input_ipv6_access_type"></a> [ipv6\_access\_type](#input\_ipv6\_access\_type) | IPv6 access type for the subnetwork. | `string` | `"EXTERNAL"` | no |
 | <a name="input_ipv6_endpoint_type"></a> [ipv6\_endpoint\_type](#input\_ipv6\_endpoint\_type) | Endpoint type of the address (VM or NETLB). | `bool` | `null` | no |
 | <a name="input_label_order"></a> [label\_order](#input\_label\_order) | Order of labels for organizing resources. | `list(string)` | <pre>[<br>  "name",<br>  "environment"<br>]</pre> | no |
-| <a name="input_labels"></a> [labels](#input\_labels) | Labels to apply to the address. | `map(string)` | `{}` | no |
 | <a name="input_log_config"></a> [log\_config](#input\_log\_config) | Logging options for subnetwork flow logs. | <pre>object({<br>    enable               = optional(bool, false)<br>    aggregation_interval = optional(string)<br>    flow_sampling        = optional(number)<br>    metadata             = optional(string)<br>    metadata_fields      = optional(list(string))<br>    filter_expr          = optional(string)<br>  })</pre> | <pre>{<br>  "aggregation_interval": null,<br>  "enable": false,<br>  "filter_expr": null,<br>  "flow_sampling": null,<br>  "metadata": null,<br>  "metadata_fields": []<br>}</pre> | no |
 | <a name="input_log_enable"></a> [log\_enable](#input\_log\_enable) | Enable or disable logging for NAT. | `bool` | `true` | no |
 | <a name="input_log_filter"></a> [log\_filter](#input\_log\_filter) | Log filtering option (ERRORS\_ONLY, TRANSLATIONS\_ONLY, ALL). | `string` | `"ALL"` | no |
