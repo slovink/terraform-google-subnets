@@ -92,7 +92,7 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_labels"></a> [labels](#module\_labels) | git::https://github.com/slovink/terraform-google-labels.git | v1.0.0 |
+| <a name="module_labels"></a> [labels](#module\_labels) | git::https://github.com/slovink/terraform-google-labels.git | add-precommit-136 |
 
 ## Resources
 
@@ -164,7 +164,7 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 | <a name="output_address_creation_timestamp"></a> [address\_creation\_timestamp](#output\_address\_creation\_timestamp) | Creation timestamp of the GCP address in RFC3339 format. |
 | <a name="output_address_effective_labels"></a> [address\_effective\_labels](#output\_address\_effective\_labels) | All labels (key/value pairs) currently applied to the resource. |
 | <a name="output_address_id"></a> [address\_id](#output\_address\_id) | The ID of the GCP address in the format: projects/{{project}}/regions/{{region}}/addresses/{{name}} |
-| <a name="output_address_label_fingerprint"></a> [address\_label\_fingerprint](#output\_address\_label\_fingerprint) | The fingerprint used for optimistic locking. |
+| <a name="output_address_ip"></a> [address\_ip](#output\_address\_ip) | The IP address that is reserved. |
 | <a name="output_address_name"></a> [address\_name](#output\_address\_name) | The name of the GCP address. |
 | <a name="output_address_project"></a> [address\_project](#output\_address\_project) | The project of the GCP address. |
 | <a name="output_address_region"></a> [address\_region](#output\_address\_region) | The region of the GCP address. |

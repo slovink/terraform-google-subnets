@@ -349,3 +349,12 @@ variable "log_filter" {
   default     = "ALL"
   description = "Log filtering option (ERRORS_ONLY, TRANSLATIONS_ONLY, ALL)."
 }
+
+#variable "project_id" {
+#  description = "The GCP Project ID."
+#  type        = string
+#  default     = "your-project-id-here"
+#}
+
+
+

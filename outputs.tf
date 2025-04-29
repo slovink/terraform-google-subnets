@@ -98,19 +98,29 @@ output "address_users" {
   value       = join("", google_compute_address.default[0].users)
 }
 
-output "address_label_fingerprint" {
-  description = "The fingerprint used for optimistic locking."
-  value       = join("", google_compute_address.default[*].label_fingerprint)
+output "address_ip" {
+  description = "The IP address that is reserved."
+  value       = google_compute_address.default[0].address
 }
 
 output "address_terraform_labels" {
   description = "Labels that are directly configured on the resource, including default labels."
-  value       = join(", ", [for k, v in google_compute_address.default[*].terraform_labels : "${k}=${v}"])
+  value = try(
+    join(", ", [
+      for k, v in lookup(google_compute_address.default[0], "labels", {}) : "${k}=${v}"
+    ]),
+    "No labels"
+  )
 }
 
 output "address_effective_labels" {
   description = "All labels (key/value pairs) currently applied to the resource."
-  value       = join(", ", [for k, v in google_compute_address.default[*].effective_labels : "${k}=${v}"])
+  value = try(
+    join(", ", [
+      for k, v in lookup(google_compute_address.default[0], "labels", {}) : "${k}=${v}"
+    ]),
+    "No labels"
+  )
 }
 
 output "address_creation_timestamp" {

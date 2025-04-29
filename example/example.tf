@@ -1,5 +1,5 @@
 provider "google" {
-  project = "testing-gcp-ops"
+  project = "slovink-hyperscaler"
   region  = "asia-northeast1"
   zone    = "asia-northeast1-a"
 }
@@ -8,7 +8,7 @@ provider "google" {
 ##### module-vpc
 #####==============================================================================
 module "vpc" {
-  source                                    = "git::https://github.com/slovink/terraform-google-network.git?ref=feature/upgrade-repo"
+  source                                    = "git::https://github.com/slovink/terraform-google-network.git?ref=1.0.0"
   name                                      = "app"
   environment                               = "test"
   routing_mode                              = "REGIONAL"

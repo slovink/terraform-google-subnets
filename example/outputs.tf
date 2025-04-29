@@ -93,11 +93,10 @@ output "address_users" {
   description = "The resources using this address."
   value       = module.subnet.address_users
 }
-
-output "address_label_fingerprint" {
-  description = "The fingerprint used for optimistic locking."
-  value       = module.subnet.address_label_fingerprint
-}
+#
+#output "address_label_fingerprint" {
+#  value = google_compute_subnetwork.example.label_fingerprint
+#}
 
 output "address_terraform_labels" {
   description = "Labels configured directly on the resource and default labels."
