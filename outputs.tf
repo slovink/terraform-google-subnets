@@ -85,7 +85,7 @@ output "address_region" {
 
 output "address_id" {
   description = "The ID of the GCP address in the format: projects/{{project}}/regions/{{region}}/addresses/{{name}}"
-  value       = join("", google_compute_address.default[*].id)
+   value       = var.enabled && var.address_enabled && length(google_compute_address.default) > 0 ? join("", google_compute_address.default[0].users) : null
 }
 
 output "address_self_link" {
