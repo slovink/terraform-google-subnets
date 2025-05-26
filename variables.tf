@@ -11,7 +11,7 @@ variable "subnet_names" {
   description = "The names of the subnets."
 }
 
-variable "network_id" {
+variable "vpc_id" {
   type        = string
   default     = ""
   description = "The VPC network the subnets belong to."
