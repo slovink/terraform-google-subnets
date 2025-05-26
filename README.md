@@ -135,7 +135,6 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 | <a name="input_module_timeouts"></a> [module\_timeouts](#input\_module\_timeouts) | Timeout configurations for operations. | `any` | `{}` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the resource, provided by the client when initially creating the resource. | `string` | `""` | no |
 | <a name="input_nat_ip_allocate_option"></a> [nat\_ip\_allocate\_option](#input\_nat\_ip\_allocate\_option) | Specifies how NAT IPs should be allocated. Options are AUTO\_ONLY or MANUAL\_ONLY. | `string` | `"AUTO_ONLY"` | no |
-| <a name="input_network"></a> [network](#input\_network) | The VPC network the subnets belong to. | `string` | `""` | no |
 | <a name="input_network_tier"></a> [network\_tier](#input\_network\_tier) | Networking tier (PREMIUM or STANDARD). | `string` | `"PREMIUM"` | no |
 | <a name="input_private_ip_google_access"></a> [private\_ip\_google\_access](#input\_private\_ip\_google\_access) | Enable private IP Google access for the subnetwork. | `bool` | `true` | no |
 | <a name="input_private_ipv6_google_access"></a> [private\_ipv6\_google\_access](#input\_private\_ipv6\_google\_access) | Enable private IPv6 Google access for the subnetwork. | `bool` | `false` | no |
@@ -156,6 +155,7 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 | <a name="input_tcp_time_wait_timeout_sec"></a> [tcp\_time\_wait\_timeout\_sec](#input\_tcp\_time\_wait\_timeout\_sec) | Timeout for TCP connections in TIME\_WAIT state (in seconds). | `number` | `120` | no |
 | <a name="input_tcp_transitory_idle_timeout_sec"></a> [tcp\_transitory\_idle\_timeout\_sec](#input\_tcp\_transitory\_idle\_timeout\_sec) | Timeout for TCP transitory connections (in seconds). | `number` | `30` | no |
 | <a name="input_udp_idle_timeout_sec"></a> [udp\_idle\_timeout\_sec](#input\_udp\_idle\_timeout\_sec) | Timeout for UDP connections (in seconds). | `number` | `30` | no |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC network the subnets belong to. | `string` | `""` | no |
 
 ## Outputs
 

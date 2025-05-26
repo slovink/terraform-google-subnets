@@ -21,7 +21,7 @@ resource "google_compute_subnetwork" "subnetwork" {
   count         = length(var.subnet_names) > 0 && length(var.ip_cidr_range) > 0 ? min(length(var.subnet_names), length(var.ip_cidr_range)) : 0
   name          = "${var.subnet_names[count.index]}-${module.labels.id}"
   project       = data.google_client_config.current.project
-  network       = var.network
+  network       = var.vpc_id
   region        = var.region
   description   = var.description
   purpose       = var.purpose
@@ -72,7 +72,7 @@ resource "google_compute_route" "default" {
   count = var.enabled && var.route_enabled ? length(var.routes) : 0
 
   project     = data.google_client_config.current.project
-  network     = var.network # This should point to your VPC network
+  network     = var.vpc_id # This should point to your VPC network
   name        = "${element(keys(var.routes), count.index)}-${module.labels.id}"
   description = lookup(var.routes[element(keys(var.routes), count.index)], "description", null)
   tags        = null #compact([for tag in split(",", lookup(var.routes[element(keys(var.routes), count.index)], "tags", "")) : trimspace(tag) if length(trimspace(tag)) > 0])
@@ -98,7 +98,7 @@ resource "google_compute_router" "default" {
   name    = format("%s-router", module.labels.id)
   project = data.google_client_config.current.project
   region  = var.region
-  network = var.network
+  network = var.vpc_id
 
   description = var.description
 
@@ -136,7 +136,7 @@ resource "google_compute_address" "default" {
   description = try(element(var.description, count.index), null)
 
   // Remove the network and subnetwork fields for external IPs
-  network    = var.address_type == "INTERNAL" ? var.network : null
+  network    = var.address_type == "INTERNAL" ? var.network.vpc_id : null
   subnetwork = var.address_type == "INTERNAL" ? var.subnetwork : null
   purpose    = var.address_type == "INTERNAL" ? var.purpose : null
 
