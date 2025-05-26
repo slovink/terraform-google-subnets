@@ -85,7 +85,7 @@ output "address_region" {
 
 output "address_id" {
   description = "The ID of the GCP address in the format: projects/{{project}}/regions/{{region}}/addresses/{{name}}"
-   value       = var.enabled && var.address_enabled && length(google_compute_address.default) > 0 ? join("", google_compute_address.default[0].users) : null
+  value       = join("", google_compute_address.default[*].id)
 }
 
 output "address_self_link" {
@@ -95,12 +95,12 @@ output "address_self_link" {
 
 output "address_users" {
   description = "The resources using this address."
-  value       = join("", google_compute_address.default[0].users)
+  value       = length(google_compute_address.default) > 0 ? join("", google_compute_address.default[0].users) : null
 }
 
 output "address_ip" {
   description = "The IP address that is reserved."
-  value       = google_compute_address.default[0].address
+  value       = length(google_compute_address.default) > 0 ? google_compute_address.default[0].address : null
 }
 
 output "address_terraform_labels" {
