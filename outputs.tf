@@ -97,3 +97,11 @@ output "router_net_region" {
   description = "The region of the GCP router NAT configuration."
   value       = join("", google_compute_router_nat.nat[*].region)
 }
+
+output "stack_type_used" {
+  value = var.stack_type
+}
+
+output "ipv6_access_type_used" {
+  value = var.stack_type == "IPV4_IPV6" ? var.ipv6_access_type : "SKIPPED"
+}

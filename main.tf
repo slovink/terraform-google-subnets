@@ -25,7 +25,7 @@ resource "google_compute_subnetwork" "subnetwork" {
   description              = var.description
   purpose                  = var.purpose
   stack_type               = var.stack_type
-  ipv6_access_type         = var.ipv6_access_type
+  ipv6_access_type         = var.stack_type == "IPV4_IPV6" ? var.ipv6_access_type : null 
   private_ip_google_access = var.private_ip_google_access
   ip_cidr_range            = var.ip_cidr_range[count.index]
   dynamic "secondary_ip_range" {
