@@ -24,6 +24,7 @@ resource "google_compute_subnetwork" "subnetwork" {
   region                   = var.gcp_region
   description              = var.description
   purpose                  = var.purpose
+  stack_type               = var.stack_type
   ipv6_access_type         = var.ipv6_access_type
   private_ip_google_access = var.private_ip_google_access
   ip_cidr_range            = var.ip_cidr_range[count.index]

@@ -70,6 +70,12 @@ variable "enabled" {
   description = "Toggle to enable or disable the main functionality."
 }
 
+variable "stack_type" {
+  description = "The stack type for the subnetwork. Options are IPV4_ONLY or IPV4_IPV6"
+  type        = string
+  default     = "IPV4_ONLY"
+}
+
 variable "route_enabled" {
   type        = bool
   default     = true
@@ -163,7 +169,7 @@ variable "purpose" {
 
 variable "ipv6_access_type" {
   type        = string
-  default     = "EXTERNAL"
+  default     = "null"
   description = "The access type of IPv6 address this subnet holds."
 }
 
