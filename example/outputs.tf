@@ -97,3 +97,14 @@ output "router_net_region" {
   description = "The region of the GCP router NAT configuration associated with the subnet."
   value       = module.subnet.router_net_region
 }
+
+output "subnets" {
+  value = {
+    "kubernetes-subnet" = {
+      name      = "kubernetes-subnet"
+      self_link = "..."
+      region    = "us-east1"
+    },
+    
+  }
+}
