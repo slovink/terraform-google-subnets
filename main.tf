@@ -156,10 +156,8 @@ resource "google_compute_router_nat" "nat" {
   project                = data.google_client_config.current.project
   nat_ip_allocate_option = var.nat_ip_allocate_option
 
-  # Check if natIpAllocateOption is MANUAL_ONLY to use manual IP assignment
   nat_ips = var.nat_ip_allocate_option == "MANUAL_ONLY" ? [google_compute_address.default[0].self_link] : []
 
-  # Optionally set drain_nat_ips
   drain_nat_ips                      = var.drain_nat_ips
   source_subnetwork_ip_ranges_to_nat = var.source_subnetwork_ip_ranges_to_nat
   udp_idle_timeout_sec               = var.udp_idle_timeout_sec
@@ -181,4 +179,9 @@ resource "google_compute_router_nat" "nat" {
       secondary_ip_range_names = subnetwork.value.secondary_ip_range_names
     }
   }
+
+  depends_on = [
+    google_compute_router.default
+  ]
 }
+
