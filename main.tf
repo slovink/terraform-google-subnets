@@ -136,7 +136,7 @@ resource "google_compute_address" "default" {
   description = try(element(var.description, count.index), null)
 
   // Remove the network and subnetwork fields for external IPs
-  network    = var.address_type == "INTERNAL" ? var.network.vpc_id : null
+  network = var.address_type == "INTERNAL" ? var.network : null
   subnetwork = var.address_type == "INTERNAL" ? var.subnetwork : null
   purpose    = var.address_type == "INTERNAL" ? var.purpose : null
 
