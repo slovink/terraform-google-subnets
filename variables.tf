@@ -358,7 +358,3 @@ variable "project_id" {
 
 
 
-variable "network" {
-  description = "The self_link or name of the network to attach resources to"
-  type        = string
-}
