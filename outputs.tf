@@ -148,3 +148,12 @@ output "router_nat_region" {
   description = "The region of the GCP router NAT configuration."
   value       = join("", google_compute_router_nat.nat[*].region)
 }
+
+
+output "network_name" {
+  value = google_compute_network.vpc.name
+}
+
+output "self_link" {
+  value = google_compute_network.vpc.self_link
+}
