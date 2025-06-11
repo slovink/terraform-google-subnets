@@ -12,10 +12,10 @@ variable "subnet_names" {
 }
 
 variable "network" {
+  description = "The self_link of the VPC network"
   type        = string
-  default     = ""
-  description = "The VPC network the subnets belong to."
 }
+
 
 variable "repository" {
   type        = string
