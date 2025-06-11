@@ -22,7 +22,7 @@ module "vpc" {
 module "subnet" {
   source        = "../"
   name          = "app"
-  environment   = "test1"
+  environment   = "test"
   subnet_names  = ["subnet-a", "subnet-b"]
   region        = "asia-northeast1"
   network       = module.vpc.vpc_id
