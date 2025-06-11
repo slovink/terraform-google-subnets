@@ -356,3 +356,8 @@ variable "project_id" {
  default     = "your-project-id-here"
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 6976bdccf2e54d03a0aac246ef00d3947d02ee36

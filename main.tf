@@ -17,7 +17,7 @@ data "google_client_config" "current" {
 ##### a given VPC network.
 #####==============================================================================
 #tfsec:ignore:google-compute-enable-vpc-flow-logs
-resource "google_compute_subnetwork" "subnetwork" {
+resource "google_compute_subnetwork" "subnetwork1" {
   count         = length(var.subnet_names) > 0 && length(var.ip_cidr_range) > 0 ? min(length(var.subnet_names), length(var.ip_cidr_range)) : 0
   name          = "${var.subnet_names[count.index]}-${module.labels.id}"
   project       = data.google_client_config.current.project
@@ -68,11 +68,11 @@ resource "google_compute_subnetwork" "subnetwork" {
 #####==============================================================================
 ##### Represents a Route resource.
 #####==============================================================================
-resource "google_compute_route" "default" {
+resource "google_compute_route" "default1" {
   count = var.enabled && var.route_enabled ? length(var.routes) : 0
 
   project     = data.google_client_config.current.project
-  network     = module.VPC.network_self_linkgittj# This should point to your VPC network
+  network     = module.VPC.network_self_link# This should point to your VPC network
   name        = "${element(keys(var.routes), count.index)}-${module.labels.id}"
   description = lookup(var.routes[element(keys(var.routes), count.index)], "description", null)
   tags        = null #compact([for tag in split(",", lookup(var.routes[element(keys(var.routes), count.index)], "tags", "")) : trimspace(tag) if length(trimspace(tag)) > 0])
@@ -93,7 +93,7 @@ resource "google_compute_route" "default" {
 #####==============================================================================
 ##### Represents a Router resource.
 #####==============================================================================
-resource "google_compute_router" "default" {
+resource "google_compute_router" "default1" {
   count   = var.enabled && var.router_enabled ? 1 : 0
   name = length(module.labels.id) > 0 ? format("%s-router", module.labels.id) : "default-router"
   project = data.google_client_config.current.project
@@ -124,7 +124,7 @@ resource "google_compute_router" "default" {
 #####==============================================================================
 ##### Represents an Address resource.
 #####==============================================================================
-resource "google_compute_address" "default" {
+resource "google_compute_address" "default1" {
   count        = var.enabled && var.address_enabled ? 1 : 0
   name         = format("%s-address", module.labels.id)
   ip_version   = var.ip_version
@@ -151,12 +151,12 @@ resource "google_compute_address" "default" {
 resource "google_compute_router_nat" "nat" {
   count                  = var.enabled && var.router_nat_enabled ? 1 : 0
   name                   = format("%s-router-nat", module.labels.id)
-  router                 = google_compute_router.default[count.index].name
+  router                 = google_compute_router.default1[count.index].name
   region                 = var.region
   project                = data.google_client_config.current.project
   nat_ip_allocate_option = var.nat_ip_allocate_option
 
-  nat_ips = var.nat_ip_allocate_option == "MANUAL_ONLY" ? [google_compute_address.default[0].self_link] : []
+  nat_ips = var.nat_ip_allocate_option == "MANUAL_ONLY" ? [google_compute_address.default1[0].self_link] : []
 
   drain_nat_ips                      = var.drain_nat_ips
   source_subnetwork_ip_ranges_to_nat = var.source_subnetwork_ip_ranges_to_nat
@@ -181,7 +181,7 @@ resource "google_compute_router_nat" "nat" {
   }
 
   depends_on = [
-    google_compute_router.default
+    google_compute_router.default1
   ]
 }
 
