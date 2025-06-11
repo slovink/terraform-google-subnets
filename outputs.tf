@@ -95,12 +95,12 @@ output "address_self_link" {
 
 output "address_users" {
   description = "The resources using this address."
-  value       = length(google_compute_address.default) > 0 ? join("", google_compute_address.default1[0].users) : null
+  value       = length(google_compute_address.default) > 0 ? join("", google_compute_address.default[0].users) : null
 }
 
 output "address_ip" {
   description = "The IP address that is reserved."
-  value       = length(google_compute_address.default) > 0 ? google_compute_address.default1[0].address : null
+  value       = length(google_compute_address.default) > 0 ? google_compute_address.default[0].address : null
 }
 
 output "address_terraform_labels" {
@@ -154,6 +154,6 @@ output "router_nat_region" {
 #  value = google_compute_network.
 #}
 #
-output "self_link" {
- value = google_compute_network.vpc.self_link
-}
+# output "self_link" {
+#  value = google_compute_network.vpc.self_link
+# }
