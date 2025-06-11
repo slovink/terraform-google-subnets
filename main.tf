@@ -1,6 +1,6 @@
 module "labels" {
   source      = "git::https://github.com/slovink/terraform-google-labels.git?ref=add-precommit-136"
-  name        = var.name
+  name        = format("%s-router", module.labels.id)
   environment = var.environment
   label_order = var.label_order
   managedby   = var.managedby
@@ -72,7 +72,7 @@ resource "google_compute_route" "default" {
   count = var.enabled && var.route_enabled ? length(var.routes) : 0
 
   project     = data.google_client_config.current.project
-  network     = var.network # This should point to your VPC network
+  network     = module.VPC.network_self_linkgittj# This should point to your VPC network
   name        = "${element(keys(var.routes), count.index)}-${module.labels.id}"
   description = lookup(var.routes[element(keys(var.routes), count.index)], "description", null)
   tags        = null #compact([for tag in split(",", lookup(var.routes[element(keys(var.routes), count.index)], "tags", "")) : trimspace(tag) if length(trimspace(tag)) > 0])
@@ -95,7 +95,7 @@ resource "google_compute_route" "default" {
 #####==============================================================================
 resource "google_compute_router" "default" {
   count   = var.enabled && var.router_enabled ? 1 : 0
-  name    = format("%s-router", module.labels.id)
+  name = length(module.labels.id) > 0 ? format("%s-router", module.labels.id) : "default-router"
   project = data.google_client_config.current.project
   region  = var.region
   network = var.network 

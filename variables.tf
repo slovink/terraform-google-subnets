@@ -356,9 +356,3 @@ variable "project_id" {
  default     = "your-project-id-here"
 }
 
-
-
-variable "network" {
-  description = "The self_link or name of the network to attach resources to"
-  type        = string
-}
