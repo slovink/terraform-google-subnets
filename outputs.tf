@@ -154,6 +154,6 @@ output "router_nat_region" {
 #  value = google_compute_network.
 #}
 #
-#output "self_link" {
-#  value = google_compute_network.vpc.self_link
-#}
+output "self_link" {
+ value = google_compute_network.vpc.self_link
+}
