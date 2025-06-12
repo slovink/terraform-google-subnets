@@ -8,7 +8,7 @@ provider "google" {
 ##### module-vpc
 #####==============================================================================
 module "vpc" {
-  source                                    = "git::https://github.com/slovink/terraform-google-network.git"
+  source                                    = "git::https://github.com/slovink/terraform-google-network.git?ref=feature/upgrade-repo"
   name                                      = "app"
   environment                               = "test1"
   routing_mode                              = "REGIONAL"
@@ -21,8 +21,8 @@ module "vpc" {
 #####==============================================================================
 module "subnet" {
   source        = "../"
-  name          = "app"
-  environment   = "test"
+  name          = "application"
+  environment   = "testing"
   subnet_names  = ["subnet-a", "subnet-b"]
   region        = "asia-northeast1"
   network       = module.vpc.vpc_id

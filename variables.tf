@@ -12,10 +12,10 @@ variable "subnet_names" {
 }
 
 variable "network" {
-  description = "The self_link of the VPC network"
   type        = string
+  default     = ""
+  description = "The VPC network the subnets belong to."
 }
-
 
 variable "repository" {
   type        = string
@@ -25,8 +25,8 @@ variable "repository" {
 
 variable "managedby" {
   type        = string
-  default     = " contact@slovink.com"
-  description = "ManagedBy, eg ' contact@slovink.com'"
+  default     = "slovink"
+  description = "ManagedBy, eg 'slovink"
 }
 
 # 2. Tags and Labels
@@ -36,12 +36,11 @@ variable "label_order" {
   description = "Order of labels for organizing resources."
 }
 
-#variable "extra_tags" {
-#  type        = map(string)
-#  default     = {}
-#  description = "Additional tags for the resource."
-#}
-
+# variable "extra_tags" {
+#   type        = map(string)
+#   default     = {}
+#   description = "Additional tags for the resource."
+# }
 
 variable "environment" {
   type        = string
@@ -297,11 +296,11 @@ variable "ipv6_endpoint_type" {
   description = "Endpoint type of the address (VM or NETLB)."
 }
 
-#variable "labels" {
-#  type        = map(string)
-#  default     = {} # Example key-value pair
-#  description = "Labels to apply to the address."
-#}
+# variable "labels" {
+#   type        = map(string)
+#   default     = {} # Example key-value pair
+#   description = "Labels to apply to the address."
+# }
 
 # 9. NAT Configuration
 variable "drain_nat_ips" {
@@ -349,10 +348,3 @@ variable "log_filter" {
   default     = "ALL"
   description = "Log filtering option (ERRORS_ONLY, TRANSLATIONS_ONLY, ALL)."
 }
-
-variable "project_id" {
- description = "The GCP Project ID."
- type        = string
- default     = "your-project-id-here"
-}
-

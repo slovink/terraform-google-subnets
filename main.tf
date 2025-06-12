@@ -8,6 +8,7 @@ module "labels" {
   #  extra_tags  = var.extra_tags
 }
 
+
 data "google_client_config" "current" {
 }
 
@@ -72,7 +73,7 @@ resource "google_compute_route" "default" {
   count = var.enabled && var.route_enabled ? length(var.routes) : 0
 
   project     = data.google_client_config.current.project
-  network     = var.network# This should point to your VPC network
+  network     = var.network # This should point to your VPC network
   name        = "${element(keys(var.routes), count.index)}-${module.labels.id}"
   description = lookup(var.routes[element(keys(var.routes), count.index)], "description", null)
   tags        = null #compact([for tag in split(",", lookup(var.routes[element(keys(var.routes), count.index)], "tags", "")) : trimspace(tag) if length(trimspace(tag)) > 0])
@@ -95,10 +96,10 @@ resource "google_compute_route" "default" {
 #####==============================================================================
 resource "google_compute_router" "default" {
   count   = var.enabled && var.router_enabled ? 1 : 0
-  name = length(module.labels.id) > 0 ? format("%s-router", module.labels.id) : "default-router"
+  name    = format("%s-router", module.labels.id)
   project = data.google_client_config.current.project
   region  = var.region
-  network = var.network 
+  network = var.network
 
   description = var.description
 
@@ -132,11 +133,11 @@ resource "google_compute_address" "default" {
   region       = var.region
   address      = length(var.address) > 0 ? element(var.address, count.index) : null
   address_type = var.address_type
-  #  labels       = var.label_order
+  # labels       = var.labels
   description = try(element(var.description, count.index), null)
 
   // Remove the network and subnetwork fields for external IPs
-  network = var.address_type == "INTERNAL" ? var.network : null
+  network    = var.address_type == "INTERNAL" ? var.network : null
   subnetwork = var.address_type == "INTERNAL" ? var.subnetwork : null
   purpose    = var.address_type == "INTERNAL" ? var.purpose : null
 
@@ -156,8 +157,10 @@ resource "google_compute_router_nat" "nat" {
   project                = data.google_client_config.current.project
   nat_ip_allocate_option = var.nat_ip_allocate_option
 
+  # Check if natIpAllocateOption is MANUAL_ONLY to use manual IP assignment
   nat_ips = var.nat_ip_allocate_option == "MANUAL_ONLY" ? [google_compute_address.default[0].self_link] : []
 
+  # Optionally set drain_nat_ips
   drain_nat_ips                      = var.drain_nat_ips
   source_subnetwork_ip_ranges_to_nat = var.source_subnetwork_ip_ranges_to_nat
   udp_idle_timeout_sec               = var.udp_idle_timeout_sec
@@ -179,9 +182,4 @@ resource "google_compute_router_nat" "nat" {
       secondary_ip_range_names = subnetwork.value.secondary_ip_range_names
     }
   }
-
-  depends_on = [
-    google_compute_router.default
-  ]
 }
-

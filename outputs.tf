@@ -1,4 +1,3 @@
-
 # Outputs for google_compute_subnetwork
 output "subnet_id" {
   description = "The ID of the GCP subnetwork."
@@ -95,32 +94,23 @@ output "address_self_link" {
 
 output "address_users" {
   description = "The resources using this address."
-  value       = length(google_compute_address.default) > 0 ? join("", google_compute_address.default[0].users) : null
+  value       = join("", google_compute_address.default[0].users)
 }
 
-output "address_ip" {
-  description = "The IP address that is reserved."
-  value       = length(google_compute_address.default) > 0 ? google_compute_address.default[0].address : null
-}
+# output "address_label_fingerprint" {
+#   description = "The fingerprint used for optimistic locking."
+#   value       = join("", google_compute_address.default[*].label_fingerprint)
+# }
 
 output "address_terraform_labels" {
   description = "Labels that are directly configured on the resource, including default labels."
-  value = try(
-    join(", ", [
-      for k, v in lookup(google_compute_address.default[0], "labels", {}) : "${k}=${v}"
-    ]),
-    "No labels"
-  )
+  value       = google_compute_address.default[0].address
+
 }
 
 output "address_effective_labels" {
   description = "All labels (key/value pairs) currently applied to the resource."
-  value = try(
-    join(", ", [
-      for k, v in lookup(google_compute_address.default[0], "labels", {}) : "${k}=${v}"
-    ]),
-    "No labels"
-  )
+  value       = google_compute_address.default[0].address
 }
 
 output "address_creation_timestamp" {
@@ -148,12 +138,3 @@ output "router_nat_region" {
   description = "The region of the GCP router NAT configuration."
   value       = join("", google_compute_router_nat.nat[*].region)
 }
-
-#
-#output "network_name" {
-#  value = google_compute_network.
-#}
-#
-# output "self_link" {
-#  value = google_compute_network.vpc.self_link
-# }
