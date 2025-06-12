@@ -73,7 +73,7 @@ resource "google_compute_route" "default" {
   count = var.enabled && var.route_enabled ? length(var.routes) : 0
 
   project     = data.google_client_config.current.project
-  network     = var.network # This should point to your VPC network
+  network     = var.network != "" ? var.network : null
   name        = "${element(keys(var.routes), count.index)}-${module.labels.id}"
   description = lookup(var.routes[element(keys(var.routes), count.index)], "description", null)
   tags        = null #compact([for tag in split(",", lookup(var.routes[element(keys(var.routes), count.index)], "tags", "")) : trimspace(tag) if length(trimspace(tag)) > 0])
@@ -99,7 +99,7 @@ resource "google_compute_router" "default" {
   name    = format("%s-router", module.labels.id)
   project = data.google_client_config.current.project
   region  = var.region
-  network = var.network
+  network = var.network != "" ? var.network : null
 
   description = var.description
 
