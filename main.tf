@@ -96,7 +96,7 @@ resource "google_compute_route" "default" {
 #####==============================================================================
 resource "google_compute_router" "default" {
   count   = var.enabled && var.router_enabled ? 1 : 0
-  name    = format("%s-router", module.labels.id)
+  name    = trimspace(module.labels.id) != "" ? module.labels.id : "default"
   project = data.google_client_config.current.project
   region  = var.region
   network = var.network
@@ -127,7 +127,7 @@ resource "google_compute_router" "default" {
 #####==============================================================================
 resource "google_compute_address" "default" {
   count        = var.enabled && var.address_enabled ? 1 : 0
-  name         = format("%s-address", module.labels.id)
+  name         =  trimspace(module.labels.id) != "" ? module.labels.id : "default"
   ip_version   = var.ip_version
   project      = data.google_client_config.current.project
   region       = var.region
