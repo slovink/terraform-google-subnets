@@ -1,5 +1,5 @@
 provider "google" {
-  project = "slovink-hyperscalers"
+  project = "pinnacles-data-center"
   region  = "asia-northeast1"
   zone    = "asia-northeast1-a"
 }
