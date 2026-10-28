@@ -1,0 +1,33 @@
+name: terratest-unit
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  static-and-unit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Static checks
+        run: make static
+
+      - name: Unit tests
+        env:
+          GOOGLE_PROJECT: slovink-nordic-dc
+        run: make unit

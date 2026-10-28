@@ -1,7 +1,6 @@
 provider "google" {
-  project = "slovink-nordic-dc"
-  region  = "asia-northeast1"
-  zone    = "asia-northeast1-a"
+  project = var.project_id
+  region  = var.region
 }
 
 #####==============================================================================
@@ -20,7 +19,7 @@ module "vpc" {
 ##### module-subnetwork
 #####==============================================================================
 module "subnet" {
-  source        = "../"
+  source        = "../.."
   name          = "application"
   environment   = "testing"
   subnet_names  = ["subnet-a", "subnet-b"]

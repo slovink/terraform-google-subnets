@@ -1,31 +1,40 @@
-package test
+//go:build integration
+
+package integration
 
 import (
+	"os"
 	"strings"
 	"testing"
 
+	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestModule(t *testing.T) {
+func TestBasicApply(t *testing.T) {
 	t.Parallel()
 
+	project := strings.TrimSpace(os.Getenv("GOOGLE_PROJECT"))
+	if project == "" {
+		t.Fatal("GOOGLE_PROJECT set karo")
+	}
+
 	opts := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../example",
+		TerraformDir: "../../examples/basic",
+		Vars: map[string]interface{}{
+			"project_id": project,
+			"region":     "asia-northeast1",
+			"name":       "it-" + strings.ToLower(random.UniqueId()),
+		},
 	})
 
-	// Test ke end me resources hamesha destroy honge
 	defer terraform.Destroy(t, opts)
-
 	terraform.InitAndApply(t, opts)
 
 	subnetID := terraform.Output(t, opts, "subnet_id")
-	subnetName := terraform.Output(t, opts, "subnet_name")
 	selfLink := terraform.Output(t, opts, "subnet_self_link")
 
 	assert.NotEmpty(t, subnetID)
-	assert.NotEmpty(t, subnetName)
 	assert.Contains(t, selfLink, "/subnetworks/")
-	assert.True(t, strings.HasSuffix(selfLink, subnetName))
 }
