@@ -8,7 +8,6 @@ module "labels" {
   #  extra_tags  = var.extra_tags
 }
 
-
 data "google_client_config" "current" {
 }
 
