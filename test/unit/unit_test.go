@@ -19,7 +19,7 @@ func TestBasicPlan(t *testing.T) {
 
 	project := strings.TrimSpace(os.Getenv("GOOGLE_CLOUD_PROJECT"))
 	if project == "" {
-		t.Fatal("GOOGLE_PROJECT set karo")
+		t.Fatal("GOOGLE_CLOUD_PROJECT set karo")
 	}
 
 	opts := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
