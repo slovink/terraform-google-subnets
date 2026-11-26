@@ -17,38 +17,55 @@ import (
 func TestBasicPlan(t *testing.T) {
 	t.Parallel()
 
+	// 1. Read project ID from environment
 	project := strings.TrimSpace(os.Getenv("GOOGLE_CLOUD_PROJECT"))
-	if project == "" {
-		t.Fatal("GOOGLE_CLOUD_PROJECT set karo")
+	require.NotEmpty(t, project, "GOOGLE_CLOUD_PROJECT environment variable is required")
+
+	// 2. Read region from environment; use default if not provided
+	region := strings.TrimSpace(os.Getenv("GOOGLE_REGION"))
+	if region == "" {
+		region = "asia-northeast1"
 	}
 
+	// 3. Generate unique name for this test
+	name := "ut-" + strings.ToLower(random.UniqueId())
+
+	// 4. Configure Terraform
 	opts := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: "../../examples/basic",
 
 		Vars: map[string]interface{}{
 			"project_id": project,
-			"region":     "asia-northeast1",
-			"name":       "ut-" + strings.ToLower(random.UniqueId()),
+			"region":     region,
+			"name":       name,
 		},
 
 		PlanFilePath: filepath.Join(t.TempDir(), "plan.out"),
 	})
 
-	// Init + Plan only. No resources created.
+	// 5. Run Terraform Init and Plan only
+	// No actual GCP resources will be created
 	plan := terraform.InitAndPlanAndShowWithStruct(t, opts)
 
-	counts := map[string]int{}
+	// 6. Verify planned resources
+	subnetCount := 0
 
-	for _, res := range plan.ResourcePlannedValuesMap {
-		counts[res.Type]++
+	for _, resource := range plan.ResourcePlannedValuesMap {
+		if resource.Type == "google_compute_subnetwork" {
+			subnetCount++
+		}
 	}
 
-	t.Logf("planned resources: %v", counts)
+	t.Logf("Project: %s", project)
+	t.Logf("Region: %s", region)
+	t.Logf("Test subnet name: %s", name)
+	t.Logf("Planned subnet count: %d", subnetCount)
 
+	// 7. Assert that at least one subnet is planned
 	require.Greater(
 		t,
-		counts["google_compute_subnetwork"],
+		subnetCount,
 		0,
-		"subnetwork plan me nahi hai",
+		"Terraform plan should contain at least one google_compute_subnetwork",
 	)
 }
